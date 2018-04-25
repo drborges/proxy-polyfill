@@ -51,9 +51,6 @@ module.exports = function proxyPolyfill() {
     const unsafeHandler = handler;
     handler = { 'get': null, 'set': null, 'apply': null, 'construct': null };
     for (let k in unsafeHandler) {
-      if (!(k in handler)) {
-        throw new TypeError(`Proxy polyfill does not support trap '${k}'`);
-      }
       handler[k] = unsafeHandler[k];
     }
     if (typeof unsafeHandler === 'function') {
